@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{CD716A93-1992-4786-BCC3-3D83356BABCD}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ScrollBoxDll\ScrollBox.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="DelphiExample\DelphiExample.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ScrollBox">
+        <MSBuild Projects="ScrollBoxDll\ScrollBox.dproj"/>
+    </Target>
+    <Target Name="ScrollBox:Clean">
+        <MSBuild Projects="ScrollBoxDll\ScrollBox.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ScrollBox:Make">
+        <MSBuild Projects="ScrollBoxDll\ScrollBox.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="DelphiExample">
+        <MSBuild Projects="DelphiExample\DelphiExample.dproj"/>
+    </Target>
+    <Target Name="DelphiExample:Clean">
+        <MSBuild Projects="DelphiExample\DelphiExample.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DelphiExample:Make">
+        <MSBuild Projects="DelphiExample\DelphiExample.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ScrollBox;DelphiExample"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ScrollBox:Clean;DelphiExample:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ScrollBox:Make;DelphiExample:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
